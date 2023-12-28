@@ -1,0 +1,22 @@
+﻿@page "/persons"
+@using BlazorServer.StrategyPatternExample.Domain.Models
+@using BlazorServer.StrategyPatternExample.Shared._Components
+
+<PageTitle>Persons</PageTitle>
+
+<MudDataGrid @attributes="Splats.DataGrid(Title!)" T="Person" Items="@Entities" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@QuickFilter" Hideable="true">
+    <ToolBarContent>
+        <MudText @attributes="Splats.PageHeader(Title!)">@Title</MudText>
+        <MudSpacer />
+            <ModelBaseSelect T="ExportType" Title="ExportTo" HandleChange="ExportChange" BoundValue="ExportType!.Id"></ModelBaseSelect>
+        <MudButton @attributes="Splats.NewButton()" class="ml-3" OnClick="Export">Export</MudButton>
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Name" Title="Name" InitialDirection="SortDirection.Ascending" />
+        <PropertyColumn Property="x => x.Description" Title="Description" />
+        <PropertyColumn Property="x => x.IsActive" Title="Active" />
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="Person" />
+    </PagerContent>
+</MudDataGrid>
